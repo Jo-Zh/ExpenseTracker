@@ -7,9 +7,6 @@ const App = () => {
   const [expenses, setExpenses] = useState([]);
   useEffect(() => {
     Axios.get("http://localhost:3001/getItems").then((res) => {
-      console.log(typeof res.data[0].date);
-      const expenseMonth = parseInt(res.data[0].date.slice(5, 7));
-      console.log(expenseMonth);
       setExpenses(res.data);
     });
   }, []);
@@ -28,26 +25,8 @@ const App = () => {
 
   return (
     <div>
-      {/* <div>
-        {expenses.map((item) => {
-          return (
-            <h1 key={item._id}>
-              "key"={item._id}
-              <br></br>
-              title={item.title}
-              <br></br>
-              amount={item.amount}
-              <br></br>
-              date={item.date}
-            </h1>
-          );
-        })}
-      </div> */}
-
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses item={expenses} />
-      {/* <NewExpense onAddExpense={addExpenseHandler} />
-      <Expenses item={expenses} /> */}
     </div>
   );
 };

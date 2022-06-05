@@ -1,7 +1,5 @@
-//define collection structures
 const mongoose = require("mongoose");
 
-//structures of collection
 const ItemsSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -19,7 +17,6 @@ const ItemsSchema = new mongoose.Schema({
   },
 });
 
-//UserModel refer to the DB, will automaticly created in your DB
-// in case you don't have this collection
 const ItemsModel = mongoose.model("items", ItemsSchema);
+
 module.exports = ItemsModel;

@@ -3,16 +3,6 @@ import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
 
 const NewExpense = (props) => {
-  /* const saveExpenseDataHandler = (saveExpense) => {
-   const saveExpense = {
-    ...enteredExpenseData,
-    id: Math.random().toString()
-  };
-  console.log(saveExpense); 
-  props.onAddExpense(saveExpense);
-  console.log(saveExpense);
-}; */
-
   const [editing, SetEditing] = useState(false);
   const colseEditing = () => {
     SetEditing(false);

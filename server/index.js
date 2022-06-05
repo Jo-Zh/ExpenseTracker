@@ -1,32 +1,17 @@
 const express = require("express");
-// importing express library
 const app = express();
-// represent all express staff
-// from lib, e.g. middleware, telling server start...
 const mongoose = require("mongoose");
-//import from lib
 
-//below is import the model we setup in models
 const ItemsModel = require("./models/Items");
 
-//import cors from cors' lib
-//allow us connect the below API to front react
 const cors = require("cors");
 app.use(cors());
-//parse req.body json to object, need to do this
+
 app.use(express.json());
 
 mongoose.connect("mongodb://localhost:27017/ExpenseTracker");
-//connect to mongonDB if from Atlas
-//(put the connectStr in parenthese, replace ... with the dataDB name)
-//or local DB address, which here I am use
 
-//below is ALl API requests or endpoints connecting frontend to database,
-//API requests,
-//.get() always with req&res. for send info to front upon request
-//req: get from frontend, res:send DB info from back to front
 app.get("/getItems", (req, res) => {
-  //below is a DB query, no data in req, so don't need to use it
   ItemsModel.find({}, (err, result) => {
     if (err) {
       res.json(err);
@@ -37,14 +22,39 @@ app.get("/getItems", (req, res) => {
 });
 
 app.post("/createItems", async (req, res) => {
-  //here will need req to store the user input data writing in to DB
   const item = req.body;
   const newItem = new ItemsModel(item);
-  await newItem.save(); //newUser.insertOne() or newUser.insertMany()
-
+  await newItem.save();
   res.json(item);
+});
+
+app.put("/update", async (req, res) => {
+  const newTitle = req.body.title;
+  const newAmount = req.body.amount;
+  const _id = req.body._id;
+
+  try {
+    await ItemsModel.findById(_id, (err, itemtoUpdate) => {
+      itemtoUpdate.title = newTitle;
+      itemtoUpdate.amount = Number(newAmount);
+      itemtoUpdate.save();
+    });
+  } catch (err) {
+    console.log(err);
+  }
+  res.send("updated");
+});
+
+app.delete("/deleteItems/:id", async (req, res) => {
+  ItemsModel.findByIdAndDelete(req.params.id, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Deleted: ", docs);
+    }
+  });
 });
 
 app.listen(3001, () => {
   console.log("SERVER Runs!");
-}); // tell server start
+});
