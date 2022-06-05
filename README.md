@@ -1,8 +1,7 @@
 # Expense Tracker
 
 <p>
-It is a MERN full stack App, help you track your expenses monthly.
-Provided the follwing functions:
+It is a MERN full stack App, helping you track your expenses monthly with the follwing functions:
 </p>
 <ol>
 <li>Creating daily new expense.</li>
