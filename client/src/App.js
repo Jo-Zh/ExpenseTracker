@@ -1,72 +1,55 @@
-import "./App.css";
 import { useState, useEffect } from "react";
 import Axios from "axios";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
-  const [listOfUser, setListOfUser] = useState([
-    //{ id: 1, name: "nata", age: 8, username: "nata01" },
-  ]);
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-  const [username, setUsername] = useState("");
-
+const App = () => {
+  const [expenses, setExpenses] = useState([]);
   useEffect(() => {
-    Axios.get("http://localhost:3001/getUsers").then((response) => {
-      setListOfUser(response.data);
+    Axios.get("http://localhost:3001/getItems").then((res) => {
+      console.log(typeof res.data[0].date);
+      const expenseMonth = parseInt(res.data[0].date.slice(5, 7));
+      console.log(expenseMonth);
+      setExpenses(res.data);
     });
   }, []);
 
-  const createUser = () => {
-    Axios.post("http://localhost:3001/createUser", {
-      name,
-      age,
-      username, //short for username: username
+  const addExpenseHandler = (expense) => {
+    const { title, amount, date } = expense;
+    Axios.post("http://localhost:3001/createItems", {
+      title,
+      amount,
+      date,
     }).then((response) => {
       alert("USER CREATED");
-      setListOfUser([...listOfUser, response.data]);
+      setExpenses([...expenses, response.data]);
     });
   };
 
   return (
-    <div className="App">
-      <div className="usersDisplay">
-        {listOfUser.map((user) => {
+    <div>
+      {/* <div>
+        {expenses.map((item) => {
           return (
-            <div>
-              <h1>Name:{user.name}</h1>
-              <h1>Age: {user.age}</h1>
-              <h1>UserName:{user.username}</h1>
-            </div>
+            <h1 key={item._id}>
+              "key"={item._id}
+              <br></br>
+              title={item.title}
+              <br></br>
+              amount={item.amount}
+              <br></br>
+              date={item.date}
+            </h1>
           );
         })}
-      </div>
+      </div> */}
 
-      <div>
-        <input
-          type="text"
-          placeholder="Name..."
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-        />
-        <input
-          type="number"
-          placeholder="Age..."
-          onChange={(e) => {
-            setAge(e.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="UserName..."
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <button onClick={createUser}>Create USer</button>
-      </div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses item={expenses} />
+      {/* <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses item={expenses} /> */}
     </div>
   );
-}
+};
 
 export default App;
