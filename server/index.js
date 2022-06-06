@@ -25,7 +25,7 @@ app.post("/createItems", async (req, res) => {
   const item = req.body;
   const newItem = new ItemsModel(item);
   await newItem.save();
-  res.json(item);
+  res.json(newItem);
 });
 
 app.put("/update", async (req, res) => {
@@ -34,25 +34,21 @@ app.put("/update", async (req, res) => {
   const _id = req.body._id;
 
   try {
-    await ItemsModel.findById(_id, (err, itemtoUpdate) => {
+    await ItemsModel.findById(_id, (error, itemtoUpdate) => {
       itemtoUpdate.title = newTitle;
-      itemtoUpdate.amount = Number(newAmount);
+      itemtoUpdate.amount = newAmount;
       itemtoUpdate.save();
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.log(error);
   }
   res.send("updated");
 });
 
 app.delete("/deleteItems/:id", async (req, res) => {
-  ItemsModel.findByIdAndDelete(req.params.id, (err, docs) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Deleted: ", docs);
-    }
-  });
+  const id = req.params.id;
+  await ItemsModel.findByIdAndDelete(id);
+  res.send("itemdeleted");
 });
 
 app.listen(3001, () => {
