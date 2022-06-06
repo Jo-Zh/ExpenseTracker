@@ -2,7 +2,7 @@
 
 <h2>Introduction</h2>
 <p>
-It is a MERN full stack App, helping you track your expenses monthly with the follwing functions:
+It is a MERN full stack App, helping you track your expenses monthly with the following functions:
 </p>
 <ol>
 <li>Creating daily new expense.</li>
