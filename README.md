@@ -1,5 +1,6 @@
 # Expense Tracker
 
+<h2>Introduction</h2>
 <p>
 It is a MERN full stack App, helping you track your expenses monthly with the follwing functions:
 </p>
@@ -8,4 +9,14 @@ It is a MERN full stack App, helping you track your expenses monthly with the fo
 <li>With a year filter, listing your monthly expenses base on year you choose.</li>
 <li>Comparing and showing your monthly expenses in a bar graph.</li>
 <li>Deleting and updating expense item </li>
+</ol>
+
+<h2>How to install and run in computer</h2>
+<ol>
+<li>Copy this repo </li>
+<li>Start mongoDB</li>
+<li>Go to server folder, run npm install express mongoose cors nodemon, then run nodemon index.js. The server will run on localhost: 3001</li>
+<li>Go to client folder, run npm install firstly, then run npm start. Front side will run on localhost:3000</li>
+Then the whole app will then work.
+
 </ol>
