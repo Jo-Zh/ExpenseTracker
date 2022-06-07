@@ -1,7 +1,7 @@
 # Expense Tracker
 
 <p>
-It is a MERN full stack App, helping you track your expenses monthly with the following functions:
+It's a react app in MERN stack, helps to track monthly expenses with the following functions:
 </p>
 
 <h2>Things you can do with this app</h2>
