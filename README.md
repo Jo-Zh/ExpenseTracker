@@ -1,9 +1,10 @@
 # Expense Tracker
 
-<h2>Introduction</h2>
 <p>
 It is a MERN full stack App, helping you track your expenses monthly with the following functions:
 </p>
+
+<h2>Things you can do with this app</h2>
 <ol>
 <li>Creating daily new expense.</li>
 <li>With a year filter, listing your monthly expenses base on year you choose.</li>
